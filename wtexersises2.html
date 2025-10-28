@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Score: <span id="score">5</span></h3>
+  <button id="inc">Increase</button>
+  <button id="dec">Decrease</button>
+
+  <script>
+    const score=document.querySelector('h3 span');
+    const btns=document.querySelectorAll('button');
+    let btn1=btns[0];
+    let btn2=btns[1];
+    function updateval(changes)
+    {
+        let current=parseInt(score.textContent);
+        let newval=current+changes;
+        if(newval>=0 && newval<=20)
+    {
+        score.textContent=newval;
+    }
+    }
+    btn1.addEventListener('click',() =>updateval(1));
+    btn2.addEventListener('click',() =>updateval(-1));
+  </script>
+</body>
+</html>

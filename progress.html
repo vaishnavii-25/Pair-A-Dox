@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Progress</title>
+    </head>
+    <body>
+        <label for="progress-text">Upload Progress:</label>
+        <progress value="0" max="100"></progress>
+
+    </body>
+    <script>
+        var progress=document.querySelector("progress");
+        var interval=setInterval(increaseProgress,30);
+
+        function increaseProgress(){
+            progress.value++;
+            if(progress.value>=100){
+                progress.value=0;
+            }
+        }
+    </script>
+</html>

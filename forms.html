@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>
+            FeedBack Form
+        </title>
+    </head>
+    <style>
+        h1{
+            color: green;
+            font-weight:bolder;
+            font-size: large;
+            width:100%;
+            padding: 20px;
+            text-align: center;
+        }
+        section{
+            display:grid;
+            border-width: 1px;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        #name{
+            color: black;
+            background-color: rgb(255, 255, 255);
+        }
+        #radio{
+            color:black;
+            background-color: rgb(255, 255, 255);
+        }
+        table,td{
+            border:solid black;
+           
+            border-width: 1px;
+            background-color:white;
+            border-collapse: collapse;
+        }
+        th{
+            
+            border:solid black;
+            border-width: 1px;
+            background-color: grey;
+
+        }
+        .button{
+            color:black;
+            background-color: grey;    
+        }
+    </style>
+    <body>
+        <form action = "mailto:perisrivaishnavi@gmail.com?subject=%feedback%" method="post">
+            <h1>FEEDBACK FORM</h1>
+            <section>
+            <label for id="name" >Name:<br>
+                <input type="text" id="name" placeholder="e.g.Ramya"  required>
+            </label>
+                <label for id="radio">Feedback Please:<br>
+                    <input type="radio" name="radio" value="5">Good
+                    <input type="radio" name="radio" value="3">Average
+                    <input type="radio" name="radio" value="1">Bad
+                </label>
+            </section>
+            
+            <section>
+                <label for id="c">Fav Colour:<br>
+                    <input type="color">
+                </label>
+                <label for id="dob">Date of Birth <br>
+                    <input type="date" required>
+                </label>
+            </section>
+            <section>
+                <label for id="check">
+                    <input type="checkbox">Check 1
+                    <input type="checkbox">Check 2
+                    <input type="checkbox">Check 3
+                </label>
+                <label for id="time">TIME <br>
+                    <input type="time" id="time">
+                </label>
+            </section>
+            <section>
+                <table>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Height</th>
+                    <tr><td>Vaishnavi</td><td>18</td><td>168</td></tr>
+                    <tr><td>Sparsha</td><td>19</td><td>160</td></tr>
+                    <tr><td>Sneha</td><td>21</td><td>175</td></tr>
+                </table>
+            </section>
+            <button id ='s' type="submit">Submit</button>
+            <button id='r' type="reset">Reset</button>
+        </form>
+    </body>
+</html>

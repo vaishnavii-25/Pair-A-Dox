@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>
+            Dom example
+        </title>
+    </head>
+    <body>
+        <p id="p1">Paragraph 1</p>
+        <p class="pcls">Paragraph 2</p>
+        <p class="pcls">Paragraph 3</p>
+        <div id="div1">Div</div>
+        <script>
+            //Acess elements
+            const ele=document.getElementById("p1");
+            console.log(ele.innerText);
+            const ele1=document.getElementsByClassName("pcls");
+            console.log(ele1[0].innerText);
+            const ele2=document.getElementsByTagName("p");
+            console.log(ele2[2].innerText);
+            const q1=document.querySelector("#p1");
+            console.log(q1.innerText);
+            const q2=document.querySelectorAll(".pcls");
+            console.log(q2[1].innerText);
+
+            //Traverse
+            const newel=document.createElement("p");
+            const txt=document.createTextNode("New paragraph");
+            newel.appendChild(txt);
+
+            const d1=getElementById("div1");
+            d1.appendChild(newel);
+
+            //Insertbefore
+            newel.insertBefore(p1,newel);
+        </script>
+    </body>
+</html>

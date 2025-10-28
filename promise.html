@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Promises</title>
+    </head>
+    <body>
+        <p id="result"></p>
+        <button id="check">Check</button>
+    </body>
+    <script>
+        const checkday=new Promise((resolve,reject)=>{
+            const day=new Date().getDate();
+            const now = new Date();
+            const date = now.getDate() + "/" + (now.getMonth() +1) + "/" + now.getFullYear();
+            if(day%2!==0)
+        {
+            resolve("current date: "+date+"It Is An Odd Day!");
+        }
+        else{
+            reject("current date: "+date+"It Is An Even Day!");
+        }
+        });
+        document.getElementById('check').addEventListener('click',()=>{
+        checkday
+        .then(msg=>document.getElementById('result').textContent=msg)
+        .catch(err=>document.getElementById('result').textContent=err);
+        });
+    </script>
+</html>

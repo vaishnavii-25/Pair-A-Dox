@@ -1,0 +1,3 @@
+- [x] Fix TypeScript errors in React-app/hello-world/src/App.tsx (remove unused variables)
+- [x] Run npm run build in React-app/hello-world
+- [x] Open dist/index.html in browser to verify

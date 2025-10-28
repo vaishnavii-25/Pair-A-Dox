@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>wt exersises</title>
+    </head>
+     
+    <body>
+        <h3>Quantity: <span>2</span></h3>
+        <button>+</button><button>-</button>
+        <script>
+        const qtyspan=document.querySelector('h3 span');
+        const btns=document.querySelectorAll('button');
+        const incbtn=btns[0];
+        const decbtn=btns[1];
+
+        function updateqty(change){
+            let current=+qtyspan.textContent
+            let newval=current+change;
+
+            if (newval>=0 && newval<=10)
+        {
+            qtyspan.textContent=newval;
+        }
+    }
+        incbtn.addEventListener("click", ()=> updateqty(1));
+        decbtn.addEventListener("click",() =>updateqty(-1));
+        </script>
+    </body>
+   
+    
+</html>

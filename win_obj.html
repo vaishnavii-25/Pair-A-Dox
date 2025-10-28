@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Window Object</title>
+    </head>
+    <body>
+        <script>
+            let timer=setInterval(()=>(alert("Hello!"),2000));//will give alert after every 2 secs
+            setTimeout(()=>{
+                clearInterval(timer);
+                alert("stop");
+            },9000);
+        </script>
+    </body>
+</html>

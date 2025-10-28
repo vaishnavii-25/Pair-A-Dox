@@ -1,0 +1,21 @@
+<html>
+    <head><title>Class and Object</title></head>
+    <body>
+        <script>
+            class Student{
+                constructor(fname,lname)
+                {
+                    this.firstname=fname;
+                    this.lastname=lname;
+                }
+                display=function()
+                {
+                    alert("fname:"+this.firstname+" "+"lastname:"+this.lastname);
+                }
+            }
+            var s1=new Student("ABC","xyz");
+            s1.display();
+            
+        </script>
+    </body>
+</html>

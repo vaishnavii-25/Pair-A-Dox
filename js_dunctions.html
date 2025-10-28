@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>Functions</title>
+    </head>
+    <body>
+        <script>
+            /*
+            function add(a,b)
+            {
+                return a+b;
+            }
+            console.log(add(3,5));
+            console.log("sum:"+add(2,3));
+            //hoisting
+            hello();
+            function hello()
+            {
+                console.log("hello");
+            }
+            //hoisting-2
+            a=10;
+            function hoist()
+            {
+                if(true)
+            {
+                a=20;
+                console.log("if"+a);
+            }
+            console.log("outside if"+a);
+            }
+        console.log("outside fun"+a);
+        console.log(hoist());
+        //no args
+        ref1=function(...args)
+        {
+            var s=0;
+            for(var i in args)
+            s=s+args[i];
+        return s;
+        }
+        console.log(ref1(1,2,3,5));
+        console.log(ref1(4,6));
+        //arrow function
+        arrfunction=(x,y)=>x-y;
+        console.log(arrfunction(6,4));
+        const arr1=["one","two","three"];
+        console.log(arr1);
+        console.log(typeof(arr1));
+        let s=arr1. toString();
+        console.log(typeof(s));
+        console.log(s);
+        arr1.push("number");
+        console.log(arr1);
+        arr1.pop();
+        console.log(arr1);
+        arr1.shift();//remove from front
+        console.log(arr1);
+        arr1.unshift("beg");//add from front
+        console.log(arr1);
+        const arr2=[1,2,3,4,5];
+        console.log(arr2);
+        arr3=arr1.concat(arr2);
+        console.log(arr1.join(arr2));
+        console.log(arr2.join(","));
+        console.log(arr3);
+        console.log(arr3.slice(3,6));
+        console.log(arr3.splice(3,6));
+        console.log(arr3.splice(-3));
+        arr3.push("four","five");
+        console.log(arr3);
+        console.log(arr3.reverse());
+        arr4=["one","two","three","four"];
+        arr5=[4,5,44,33,12];
+        console.log(arr4.sort());
+        console.log(arr5.sort());
+        console.log(arr5.sort(function(a,b)
+    {
+        return a-b;//ascending,for descending b-a;
+    }));
+    */
+        //Strings
+        var str1="abcdefghi";
+        console.log(str1.charAt(4));//finding char at 4th pos
+        console.log(str1.length);
+        str2="12345";
+        console.log(str1.concat(str2));//join doesnt work here
+        var date="25-08-2025";
+        console.log(date.split("-"));//returns a list with each element split by -
+        console.log(str2.split(" "));
+        console.log(str1.substring(3,6));//wont include 6th element just like slice
+        console.log(str1.substr(3,2));//prints two elements from index number 3(splice)
+        console.log(str1.substring(-3));
+        console.log(str1.substr(-3));
+        console.log(str1.replace("a","2"));
+        console.log(str1.toUpperCase());
+
+        //NaN
+        const n='abc';
+        console.log(typeof(n));
+        if(isNaN(n))
+        {
+            console.log("Character");
+        }
+        else
+        console.log("Number");
+
+        //math
+        var n1=123.45;
+        console.log(Math.floor(n1));
+        console.log(Math.ceil(n1));
+        var rnd=0+Math.floor(Math.random()*5);//generating random number(0 to 5) 5 not included
+        console.log(rnd);
+        </script>
+    </body>
+</html>

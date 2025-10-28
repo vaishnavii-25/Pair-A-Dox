@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Javascript</title>
+        <script>
+            console.log("hello terminal/console");
+            document.write("Hello web page(head)");
+        </script>
+        <script src="jsbasics.js"></script>
+    </head>
+    <body>
+        <script>
+            
+            console.log("Hello-body section");
+            document.write("hello webpage(body)");
+            //alert("Alert section");
+            //print("print-");
+            console.log("datatypes");
+            x=10;
+            console.log("Value of x"+x);
+            console.log("Type of x"+" "+typeof(x));
+            x=10+10;
+            console.log(x);
+            x=10+"10";
+            console.log(x);
+            x=true;
+            console.log(x);
+            console.log(typeof(x));
+            //let x;//local scope variable so it cant be assigned multiple times error
+            var x;
+            x=5;
+            x='ABC';
+            console.log(x);
+            let a=10;
+            let b="10";//even if this is string it still prints both as it checks only type not value
+            if(a==b){
+                console.log("true"+a);
+            }
+            console.log("false"+b);
+            let c=10;
+            let d="10";//prints only false bcz === checks both type and value
+            if(c===d){
+                console.log("true"+c);
+            }
+            console.log("false"+d);
+            let e;
+            console.log(e);//prints undefined
+            console.log(typeof(e))//prints undefined
+            let f="char";
+            let n=isNaN(f);
+            console.log(n);
+        </script>
+    </body>
+    
+</html>

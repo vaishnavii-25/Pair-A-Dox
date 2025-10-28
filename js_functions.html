@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Functions</title>
+    </head>
+    <body>
+        <script>
+            function add(a,b)
+            {
+                return a+b;
+            }
+            console.log(add(3,5));
+            console.log("sum:"+add(2,3));
+            //hoisting
+            hello();
+            function hello()
+            {
+                console.log("hello");
+            }
+            //hoisting-2
+            a=10;
+            function hoist()
+            {
+                if(false)
+            {
+                a=20;
+                console.log(a);
+            }
+            console.log(a);
+            }
+            
+        </script>
+    </body>
+</html>

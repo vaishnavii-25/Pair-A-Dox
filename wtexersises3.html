@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <ul id="subjects">
+    <li>CN</li>
+    <li>OS</li>
+    <li>DBMS</li>
+  </ul>
+  <button id="add">Add AI</button>
+  <button id="remove">Remove Last</button>
+
+  <script>
+  const addbtn = document.getElementById('add');
+  const delbtn = document.getElementById('remove');
+
+  function addsub() {
+    const ul = document.getElementById('subjects'); // ✅ select UL
+    let newsub = document.createElement('li');
+    newsub.textContent = 'AI';
+    ul.appendChild(newsub); // ✅ correct method
+  }
+
+  function delsub() {
+    const ul = document.getElementById('subjects'); 
+    if (ul.lastElementChild) {  // ✅ check if there’s something to delete
+      ul.removeChild(ul.lastElementChild);
+    }
+  }
+
+  addbtn.addEventListener('click', addsub);
+  delbtn.addEventListener('click', delsub);
+</script>
+</body>
+</html>

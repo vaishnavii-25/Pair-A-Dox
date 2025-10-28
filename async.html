@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>
+            async,await
+        </title>
+    </head>
+    <body>
+        <script>
+            function fetchdata(){
+                return new Promise((resolve)=>{
+                    setTimeout(()=>{
+                        resolve("Data Fetched Successfully!");
+                    },3000);
+            });
+                
+            }
+            async function showdata(){
+                    console.log("fetching data...");
+                    const result=await fetchdata();
+                    console.log(result);
+                    console.log("done");
+            }
+            showdata();
+        </script>
+    </body>
+</html>

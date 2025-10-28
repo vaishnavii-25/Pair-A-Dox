@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Json example</title>
+    </head>
+    <body>
+        <script>
+            var text='{"fname":"ABC","srn":"123"}';
+            //str to obj
+            console.log(typeof(text));
+            var obj=JSON.parse(text);
+            console.log(typeof(obj));
+            console.log(obj.fname+" "+obj.srn);
+            //obj to str
+            var str=JSON.stringify(obj);
+            console.log(typeof(str));
+            console.log(str);
+        </script>
+    </body>
+</html>

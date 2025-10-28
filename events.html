@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Event Example</title>
+    </head>
+    <body>
+        <button onclick="alert('hello')">Click</button>
+        <button ondblclick="fun1()">Click</button>
+        <button id="b1">Click1</button>
+        <button id="b2">Click2</button>
+        <script>
+            function fun1()
+            {
+                alert('Hello-fun1');
+            }
+            var btn1=document.getElementById("b1");
+            btn1.onclick=fun2();
+            btn1.addEventListener('click',fun2);
+            function fun2()
+            {
+                alert('Hello-fun2');
+            }
+            var btn2=document.getElementById("b2");
+            btn2.onclick=fun3();
+            btn2.addEventListener('click',fun3);
+            function fun3()
+            {
+                alert('Hello-fun3');
+            }
+        </script>
+    </body>
+</html>

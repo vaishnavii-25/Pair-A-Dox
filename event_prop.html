@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Event Propagation</title>
+    </head>
+    <style>
+        div{
+            border:1px solid black;
+            background-color:aqua;
+            width:80%;
+            padding: 5px;
+        }
+        p{
+            border:1px solid black;
+            background-color:greenyellow;
+            width:50%;
+            padding: 2px;
+        }
+    </style>
+    <body>
+        <div>dIv Element
+            <p> Paragraph </p>
+        </div>
+        <script>
+            const d=document.querySelector('div');
+            d.addEventListener('click',function()
+            {
+                event.stopPropagation;
+                alert('div');
+            });
+            const p=document.querySelector('p');
+            p.addEventListener('click',function()
+            {
+                event.stopPropagation;
+                alert('para');
+                
+            });//outer element is div,inner element is para,when clicked on paragraph, it gives both alerts,when clicked on only div,it gives only one alert
+        </script>
+    </body>
+</html>
