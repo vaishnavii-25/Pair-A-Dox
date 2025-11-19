@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import axios from "axios";
+
 
 // --- Global Constants & Theme Configuration ---
 
@@ -8,7 +10,12 @@ if (typeof document !== 'undefined' && !document.head.querySelector(`link[href="
     document.head.insertAdjacentHTML('beforeend', `<link href="${FONT_CDN}" rel="stylesheet" />`);
 }
 
+
+
 // Type definitions for game state and data structures
+
+
+
 interface CardData {
     id: number;
     value: string;
@@ -88,6 +95,7 @@ const useViewportWidth = (): number => {
     }, []);
     return width;
 };
+
 
 
 // --- Game Components ---
@@ -350,6 +358,10 @@ const App: React.FC = () => {
     const [lockBoard, setLockBoard] = useState<boolean>(false);
     const [totalMatches, setTotalMatches] = useState<number>(0);
     const [modalMessage, setModalMessage] = useState<string>('');
+    const [timer, setTimer] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const [bestTime, setBestTime] = useState<number | null>(null);
+
 
     // Keeping viewportWidth, but no longer using it for grid column calculation
     const viewportWidth = useViewportWidth();
@@ -374,6 +386,13 @@ const App: React.FC = () => {
             initialPlayers.push({ id: 2, name: 'Player 2', score: 0 });
         }
         setPlayers(initialPlayers);
+        if (mode === 1) {      
+            setTimer(0);       // reset timer
+            setIsRunning(true); // start timer
+        } else {
+            setIsRunning(false); // don't run in duo mode
+        }
+
 
         // Prepare cards: Duplicate values and shuffle (36 cards total)
         const cardValues: string[] = [...INITIAL_CARD_FRONTS, ...INITIAL_CARD_FRONTS]; // 18 unique values * 2
@@ -395,7 +414,19 @@ const App: React.FC = () => {
             
             if (gameMode === 1) {
                 message = `YOU WON! Found all ${totalMatches} pairs.`;
-            } else {
+                // Stop the timer
+                setIsRunning(false);
+
+                // Save highscore
+                axios.post("http://localhost:3000/highscore", { time: timer })
+                .then(res => {
+                if (res.data.newRecord) {
+                    setBestTime(res.data.highscore.time);
+                 }
+                })
+                .catch(err => console.error(err));
+                } 
+                else {
                 const [p1, p2] = players;
                 if (p1.score > p2.score) {
                     message = `${p1.name} WINS with ${p1.score} matches!`;
@@ -455,6 +486,20 @@ const App: React.FC = () => {
         }
     }, [flippedCards, currentPlayerIndex, changeTurn]);
 
+   
+
+    //Effect for timer
+    useEffect(() => {
+        if (!isRunning) return;
+
+        const interval = setInterval(() => {
+            setTimer(prev => prev + 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [isRunning]);
+
+
     // Effect to check for match after two cards are flipped
     useEffect(() => {
         if (flippedCards.length === 2) {
@@ -468,6 +513,38 @@ const App: React.FC = () => {
             checkForWin();
         }
     }, [allMatchesFound, checkForWin]);
+
+        //Use effet for axios get and post
+        useEffect(() => {
+        axios.get("http://localhost:3000/highscore")
+            .then(res => {
+            if (res.data?.time) setBestTime(res.data.time);
+            })
+            .catch(err => console.error("Failed to fetch best time:", err));
+        }, []);
+
+
+            useEffect(() => {
+                if (gameState === 'finished' && timer !== null) {
+                    axios.post("http://localhost:3000/highscore", { time: timer })
+                        .then(res => {
+                            if (res.data.newRecord) {
+                                setBestTime(res.data.highscore.time); // FIXED
+                                setModalMessage(
+                                    `You completed all the pairs!\n🎉 NEW PERSONAL BEST: ${timer}s 🎉`
+                                );
+                            } else {
+                                setModalMessage("You completed all the pairs!");
+                            }
+                        })
+                        .catch(err => console.error("Failed to update best time:", err));
+                }
+            }, [gameState, timer]);
+
+
+            
+
+
 
 
     // --- Event Handlers ---
@@ -525,6 +602,12 @@ const App: React.FC = () => {
                                 imageUrl={START_BUTTON_URL}
                             />
                         </div>
+                        {bestTime !== null && (
+                            <div style={{marginTop:'40px',padding:'12px 24px',border:'4px solid #228B22',borderRadius:'12px',backgroundColor:'#a2d5a2',color:'#114411',fontFamily:`'Press Start 2P', cursive`,fontSize:'1.25rem',textAlign:'center',width:'fit-content',marginLeft:'auto',marginRight:'auto',boxShadow:'0 10px 25px rgba(0,0,0,0.4)',userSelect:'none',WebkitTextStroke:'1px #114411',fontWeight:'bold'}}>
+                                PERSONAL BEST: {bestTime}s
+                            </div>
+                            )}
+
                         <img
                             src="https://ik.imagekit.io/hlc5wke6q/Picture.png?updatedAt=1761379857367"
                             alt="Decorative Game Graphic Left"
@@ -668,6 +751,18 @@ const App: React.FC = () => {
                         <h3 style={{ fontSize: '12px', marginBottom: '8px' }}>
                             PLAYER: <span style={{ fontWeight: 'bold' }}>P1</span>
                         </h3>
+                    {/* Timer Display */}
+                    <div style={{ marginTop: '10px', fontSize: '0.75rem' }}>
+                        TIME: <span style={{ fontSize: '1.25rem' }}>{timer}s</span>
+                    </div>
+
+                    {/* Best Time */}
+                    {bestTime !== null && (
+                        <div style={{ marginTop: '8px', fontSize: '0.75rem' }}>
+                            BEST: <span style={{ fontSize: '1.1rem' }}>{bestTime}s</span>
+                        </div>
+                    )}
+
                     </div>
                 ) : (
                     <>
@@ -695,7 +790,8 @@ const App: React.FC = () => {
                 </div>
             </div>
         );
-    }, [players, currentPlayerIndex, gameMode, totalMatches]);
+    }, [players, currentPlayerIndex, gameMode, totalMatches, timer, bestTime]);
+
 
 
     const renderModal = (): React.JSX.Element => (
@@ -713,7 +809,7 @@ const App: React.FC = () => {
                     boxShadow: '0 10px 50px rgba(0,0,0,0.5)'
                 }}
             >
-                <h3 style={{ fontSize: '1rem', marginBottom: '16px', color: THEME_COLORS.text }}>
+                <h3 style={{ fontSize: '1rem', marginBottom: '16px', color: THEME_COLORS.text, whiteSpace: 'pre-line' }}>
                     {modalMessage}
                 </h3>
                 <PixelButton onClick={() => window.location.reload()} style={{ fontSize: '14px' }}>
