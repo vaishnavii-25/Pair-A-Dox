@@ -3,6 +3,7 @@
 ## Overview
 
 Pair-A-Dox is a full-stack memory card matching game built using React and Express. The objective is to match all pairs of cards in the shortest possible time. Player scores are stored in a MongoDB database, allowing completed games to be recorded and displayed on a leaderboard.
+ USE THIS LINK TO ACCESS THE GAME: https://pair-a-dox-jyxl.vercel.app/
 
 ---
 
